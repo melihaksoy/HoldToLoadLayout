@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="HoldToLoadLayout">
+        <attr name="strokeColor" format="string"/>
+        <attr name="strokeWidth" format="dimension"/>
+        <attr name="strokeAlpha" format="integer"/>
+        <attr name="startAngle" format="integer"/>
+        <attr name="duration" format="integer"/>
+        <attr name="drawToFront" format="boolean"/>
+        <attr name="stopWhenFilled" format="boolean"/>
+    </declare-styleable>
+</resources>
