@@ -6,7 +6,6 @@
         <attr name="strokeAlpha" format="integer"/>
         <attr name="startAngle" format="integer"/>
         <attr name="duration" format="integer"/>
-        <attr name="drawToFront" format="boolean"/>
         <attr name="stopWhenFilled" format="boolean"/>
     </declare-styleable>
 </resources>

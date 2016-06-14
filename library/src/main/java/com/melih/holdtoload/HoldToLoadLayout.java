@@ -11,7 +11,6 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,11 +57,10 @@ public class HoldToLoadLayout extends FrameLayout {
 	private boolean isFilling;
 	private boolean isPreparingProgressAnimator;
 	private boolean isPreparingColorAnimator;
-	private boolean drawToFront;
-	private boolean stopWhenFilled;
+	private boolean isInitialized;
+	private boolean animateColors;
 
-	private boolean isInitialized = false;
-	private boolean animateColors = false;
+	private boolean stopWhenFilled = true;
 	private boolean isReverseAnimationEnabled = true;
 
 	@SuppressLint("unused")
@@ -140,12 +138,6 @@ public class HoldToLoadLayout extends FrameLayout {
 
 	@Override
 	protected void dispatchDraw(Canvas canvas) {
-		if (drawToFront) {
-			super.dispatchDraw(canvas);
-			canvas.drawArc(mRectF, mStartAngle, mAngle, true, mPaint);
-			return;
-		}
-
 		canvas.drawArc(mRectF, mStartAngle, mAngle, true, mPaint);
 		super.dispatchDraw(canvas);
 	}
@@ -191,6 +183,8 @@ public class HoldToLoadLayout extends FrameLayout {
 				isFilling = false;
 				invalidate();
 				break;
+			default:
+				break;
 		}
 
 		return true;
@@ -199,10 +193,8 @@ public class HoldToLoadLayout extends FrameLayout {
 	@Override
 	public void invalidate() {
 		super.invalidate();
-		if (stopWhenFilled) {
-			if (mAngle == 360) {
-				return;
-			}
+		if (stopWhenFilled && mAngle == 360) {
+			return;
 		}
 
 		update();
@@ -215,15 +207,13 @@ public class HoldToLoadLayout extends FrameLayout {
 		try {
 			setStrokeColor(Color.parseColor(colorString));
 		} catch (Exception e) {
-			setStrokeColor(Color.RED);
+			setStrokeColor(Color.GREEN);
 		}
-
 
 		setStartAngle(typedArray.getInt(R.styleable.HoldToLoadLayout_startAngle, DEFAULT_START_ANGLE));
 		setStrokeWidth(typedArray.getDimensionPixelSize(R.styleable.HoldToLoadLayout_strokeWidth, 0));
 		setStrokeAlpha(typedArray.getInt(R.styleable.HoldToLoadLayout_strokeAlpha, DEFAULT_ALPHA));
 		setDuration(typedArray.getInt(R.styleable.HoldToLoadLayout_duration, DEFAULT_DURATION));
-		setDrawToFront(typedArray.getBoolean(R.styleable.HoldToLoadLayout_drawToFront, false));
 		setStopWhenFilled(typedArray.getBoolean(R.styleable.HoldToLoadLayout_stopWhenFilled, false));
 
 		typedArray.recycle();
@@ -377,7 +367,6 @@ public class HoldToLoadLayout extends FrameLayout {
 			isPreparingColorAnimator = true;
 
 			if (!mForwardColorAnimator.isRunning()) {
-				Log.w("Forward", mAnimatedValue + "");
 				mForwardColorAnimator.setFloatValues(mAnimatedValue, 1);
 				mForwardColorAnimator.setDuration((long) ((360 - mAngle) * mDurationPerAngle));
 				mForwardColorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -407,7 +396,6 @@ public class HoldToLoadLayout extends FrameLayout {
 			isPreparingColorAnimator = true;
 
 			if (!mReverseColorAnimator.isRunning()) {
-				Log.w("Reverse", mAnimatedValue + "");
 				mReverseColorAnimator.setFloatValues(mAnimatedValue, 0);
 				mReverseColorAnimator.setDuration((long) (mAngle * mDurationPerAngle));
 				mReverseColorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -469,26 +457,6 @@ public class HoldToLoadLayout extends FrameLayout {
 	@SuppressLint("unused")
 	public boolean stopWhenFilled() {
 		return stopWhenFilled;
-	}
-
-	/**
-	 * Set true if you want to draw stroke over the source image, false by default
-	 *
-	 * @param drawToFront {@code true} if image source should be behind stroke
-	 */
-	@SuppressLint("unused")
-	public void setDrawToFront(boolean drawToFront) {
-		this.drawToFront = drawToFront;
-	}
-
-	/**
-	 * Returns true if view is drawing over source image
-	 *
-	 * @return {@code true} if stroke is drawing over image source, returns {@code false} by default if not set
-	 */
-	@SuppressLint("unused")
-	public boolean isDrawToFront() {
-		return drawToFront;
 	}
 
 	/**
@@ -620,11 +588,14 @@ public class HoldToLoadLayout extends FrameLayout {
 	 * Set alpha for the stroke
 	 *
 	 * @param alpha int value of alpha, must be between 0 and 255 inclusive
+	 * @throws IllegalArgumentException if {@code durationInMillis} is less than 0 or greater than 255
 	 */
 	@SuppressLint("unused")
-	public void setStrokeAlpha(int alpha) {
+	public void setStrokeAlpha(int alpha) throws IllegalArgumentException {
 		if (alpha >= 0 && alpha <= 255) {
 			mAlpha = alpha;
+		} else {
+			throw new IllegalArgumentException("Alpha should be minimum 0 and maximum 255");
 		}
 	}
 
@@ -651,9 +622,7 @@ public class HoldToLoadLayout extends FrameLayout {
 	 */
 	@SuppressLint("unused")
 	public void setStartAngle(float startAngle) {
-		if (mStartAngle >= 0 && mStartAngle <= 360) {
-			mStartAngle = startAngle;
-		}
+		mStartAngle = startAngle;
 	}
 
 	/**
@@ -684,20 +653,6 @@ public class HoldToLoadLayout extends FrameLayout {
 	@SuppressLint("unused")
 	public void setFillListener(FillListener fillListener) {
 		mFillListener = fillListener;
-	}
-
-	/**
-	 * Set if only stroke of fill progress should be painted
-	 *
-	 * @param showOnlyStroke {@code true} if only outlines should be painted
-	 */
-	@SuppressLint("unused")
-	public void setTransparentInside(boolean showOnlyStroke) {
-		if (showOnlyStroke) {
-			mPaint.setStyle(Paint.Style.STROKE);
-		} else {
-			mPaint.setStyle(Paint.Style.FILL);
-		}
 	}
 
 	/**
