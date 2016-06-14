@@ -1,8 +1,14 @@
-language: android
 android:
   components:
+    # Update Android SDK Tools
+    - tools
+
     - build-tools-23.0.3
     - android-23
 
-before_script:
-    - chmod +x gradlew
+    # Support library
+    - extra-android-support
+    - extra-android-m2repository
+
+script:
+    - chmod +x ./gradlew
