@@ -7,7 +7,7 @@ HoldToLoadLayout is a view group that can contain a single child. It draws your 
 Sample Gifs
 ===========
 ![Anim](https://github.com/melihaksoy/HoldToLoadLayout/blob/master/gifs/htl_1.gif)
-![Anim](https://github.com/melihaksoy/HoldToLoadLayout/blob/master/gifs/htl_2.gif)
+![Anim](https://github.com/melihaksoy/HoldToLoadLayout/blob/master/gifs/hlt_2.gif)
 ![Anim](https://github.com/melihaksoy/HoldToLoadLayout/blob/master/gifs/htl_3.gif)
 ![Anim](https://github.com/melihaksoy/HoldToLoadLayout/blob/master/gifs/htl_4.gif)
 
