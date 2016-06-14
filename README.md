@@ -1,7 +1,8 @@
 HoldToLoadLayout
 ================
-<a href="http://developer.android.com/index.html" target="_blank"><img src="https://img.shields.io/badge/platform-android-green.svg"/></a> <a href="https://android-arsenal.com/api?level=15" target="_blank"><img src="https://img.shields.io/badge/API-15%2B-green.svg?style=flat"/></a> <a href="http://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat"/></a>
-[![Release](https://jitpack.io/#melihaksoy/HoldToLoadLayout)](https://jitpack.io/#fiskurgit/ChipCloud) 
+<a href="http://developer.android.com/index.html" target="_blank"><img src="https://img.shields.io/badge/platform-android-green.svg"/></a>
+<a href="https://android-arsenal.com/api?level=15" target="_blank"><img src="https://img.shields.io/badge/API-15%2B-green.svg?style=flat"/></a> 
+<a href="http://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat"/></a>
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e6d90fbd33ec42cfaf3501312f79d114)](https://www.codacy.com/app/aksoy-melihcan/HoldToLoadLayout?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=melihaksoy/HoldToLoadLayout&amp;utm_campaign=Badge_Grade)
 
 HoldToLoadLayout is a view group that can contain a single child. It draws your child to middle of layout, and performs loading wheel around it with settings you determined.
