@@ -10,6 +10,7 @@ HoldToLoadLayout
 
 HoldToLoadLayout is a view group that can contain a single child. It draws your child to middle of layout, and performs loading wheel around it with settings you determined.
 
+
 Sample Gifs
 ===========
 ![Anim](https://github.com/melihaksoy/HoldToLoadLayout/blob/master/gifs/htl_1.gif)
