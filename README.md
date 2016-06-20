@@ -5,6 +5,7 @@ HoldToLoadLayout
 <a href="http://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat"/></a>
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e6d90fbd33ec42cfaf3501312f79d114)](https://www.codacy.com/app/aksoy-melihcan/HoldToLoadLayout?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=melihaksoy/HoldToLoadLayout&amp;utm_campaign=Badge_Grade)
 [![Build Status](https://travis-ci.org/melihaksoy/HoldToLoadLayout.svg?branch=master)](https://travis-ci.org/melihaksoy/HoldToLoadLayout)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-HoldToLoadLayout-green.svg?style=true)](https://android-arsenal.com/details/1/3743)
 
 
 HoldToLoadLayout is a view group that can contain a single child. It draws your child to middle of layout, and performs loading wheel around it with settings you determined.
