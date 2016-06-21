@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 /**
- * @Author Melih Aksoy
+ * @author Melih Aksoy
  * Created by Melih on 19/01/16.
  */
 public class HoldToLoadLayout extends FrameLayout {
@@ -25,6 +25,7 @@ public class HoldToLoadLayout extends FrameLayout {
 	public static final int DEFAULT_DURATION = 1500;
 	public static final int DEFAULT_START_ANGLE = 270;
 	public static final int DEFAULT_ALPHA = 255;
+	public static final int DEFAULT_COLOR = Color.GREEN;
 
 	private Paint mPaint;
 	private RectF mRectF;
@@ -207,7 +208,7 @@ public class HoldToLoadLayout extends FrameLayout {
 		try {
 			setStrokeColor(Color.parseColor(colorString));
 		} catch (Exception e) {
-			setStrokeColor(Color.GREEN);
+			setStrokeColor(DEFAULT_COLOR);
 		}
 
 		setStartAngle(typedArray.getInt(R.styleable.HoldToLoadLayout_startAngle, DEFAULT_START_ANGLE));

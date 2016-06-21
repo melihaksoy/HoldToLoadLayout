@@ -85,7 +85,7 @@ setStrokeColor(int color)
 setStrokeColor(String color)
 ```
 <ul><li>
-Set loading's color. Default color is <b>Color.RED</b>.
+Set loading's color. Default color is <b>Color.GREEN</b> ( <b> HoldToLoadLayout.DEFAULT_COLOR </b> ).
 </li></ul>
 
 ```java
