@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		HoldToLoadLayout holdToLoadLayout = (HoldToLoadLayout) findViewById(R.id.holdToLoadLayout);
+		HoldToLoadLayout holdToLoadLayout = (HoldToLoadLayout) findViewById(R.id.);
 
 		if (holdToLoadLayout != null) {
 			holdToLoadLayout.setStrokeWidth(10);

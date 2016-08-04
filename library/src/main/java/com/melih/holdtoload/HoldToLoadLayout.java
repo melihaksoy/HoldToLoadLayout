@@ -204,18 +204,18 @@ public class HoldToLoadLayout extends FrameLayout {
 	private void init(AttributeSet attrs) {
 		TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.HoldToLoadLayout, 0, 0);
 
-		String colorString = typedArray.getString(R.styleable.HoldToLoadLayout_strokeColor);
+		String colorString = typedArray.getString(R.styleable.HoldToLoadLayout_hold_strokeColor);
 		try {
 			setStrokeColor(Color.parseColor(colorString));
 		} catch (Exception e) {
 			setStrokeColor(DEFAULT_COLOR);
 		}
 
-		setStartAngle(typedArray.getInt(R.styleable.HoldToLoadLayout_startAngle, DEFAULT_START_ANGLE));
-		setStrokeWidth(typedArray.getDimensionPixelSize(R.styleable.HoldToLoadLayout_strokeWidth, 0));
-		setStrokeAlpha(typedArray.getInt(R.styleable.HoldToLoadLayout_strokeAlpha, DEFAULT_ALPHA));
-		setDuration(typedArray.getInt(R.styleable.HoldToLoadLayout_duration, DEFAULT_DURATION));
-		setStopWhenFilled(typedArray.getBoolean(R.styleable.HoldToLoadLayout_stopWhenFilled, false));
+		setStartAngle(typedArray.getInt(R.styleable.HoldToLoadLayout_hold_startAngle, DEFAULT_START_ANGLE));
+		setStrokeWidth(typedArray.getDimensionPixelSize(R.styleable.HoldToLoadLayout_hold_strokeWidth, 0));
+		setStrokeAlpha(typedArray.getInt(R.styleable.HoldToLoadLayout_hold_strokeAlpha, DEFAULT_ALPHA));
+		setDuration(typedArray.getInt(R.styleable.HoldToLoadLayout_hold_duration, DEFAULT_DURATION));
+		setStopWhenFilled(typedArray.getBoolean(R.styleable.HoldToLoadLayout_hold_stopWhenFilled, false));
 
 		typedArray.recycle();
 
