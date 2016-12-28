@@ -145,7 +145,7 @@ Add library dependency to your `build.gradle` file:
 
 ```groovy
 dependencies {    
-     compile 'com.github.melihaksoy:HoldToLoadLayout:1.0.2'
+     compile 'com.github.melihaksoy:HoldToLoadLayout:1.0.3'
 }
 ```
 
