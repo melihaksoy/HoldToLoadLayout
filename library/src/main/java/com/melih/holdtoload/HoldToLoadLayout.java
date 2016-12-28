@@ -319,6 +319,7 @@ public class HoldToLoadLayout extends FrameLayout {
 
 						if (mFillListener != null) {
 							mFillListener.onAngleChanged(mAngle);
+							mFillListener.onOffsetChanged(mAngle / 360);
 							if (mAngle == 360) {
 								mFillListener.onFull();
 								mForwardAnimator.removeUpdateListener(this);
@@ -351,6 +352,7 @@ public class HoldToLoadLayout extends FrameLayout {
 
 						if (mFillListener != null) {
 							mFillListener.onAngleChanged(mAngle);
+							mFillListener.onOffsetChanged(mAngle / 360);
 							if (mAngle == 0) {
 								mFillListener.onEmpty();
 								mReverseAnimator.removeUpdateListener(this);
@@ -538,7 +540,7 @@ public class HoldToLoadLayout extends FrameLayout {
 	 * @param strokeWidth stroke width in pixels
 	 */
 	@SuppressLint("unused")
-	public void setStrokeWidth(int strokeWidth) {
+	public void setStrokeWidth(float strokeWidth) {
 		if (strokeWidth > 0) {
 			mStrokeWidth = strokeWidth;
 		}
@@ -694,5 +696,8 @@ public class HoldToLoadLayout extends FrameLayout {
 
 		@SuppressLint("unused")
 		void onAngleChanged(float angle);
+
+		@SuppressLint("unused")
+		void onOffsetChanged(float offset);
 	}
 }
