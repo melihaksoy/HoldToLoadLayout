@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		HoldToLoadLayout holdToLoadLayout = (HoldToLoadLayout) findViewById(R.id.);
+		final HoldToLoadLayout holdToLoadLayout = (HoldToLoadLayout) findViewById(R.id.holdToLoadLayout);
 
 		if (holdToLoadLayout != null) {
 			holdToLoadLayout.setStrokeWidth(10);
@@ -24,10 +24,16 @@ public class MainActivity extends AppCompatActivity {
 			holdToLoadLayout.setColorAnimator(Color.YELLOW, Color.RED);
 			holdToLoadLayout.setStartAngle(30);
 
+			/**
+			 * Enabling this will suppress the use of stopWhenFilled and cause progress to stop at all times
+			 */
+			holdToLoadLayout.setHoldAtLastPosition(true);
+
 			holdToLoadLayout.setFillListener(new HoldToLoadLayout.FillListener() {
 				@Override
 				public void onFull() {
-
+					//					holdToLoadLayout.setStrokeColor(android.R.color.holo_green_dark);
+					holdToLoadLayout.setDuration(1000);
 				}
 
 				@Override

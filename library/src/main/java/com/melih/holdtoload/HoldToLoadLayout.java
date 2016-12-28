@@ -18,11 +18,11 @@ import android.widget.FrameLayout;
 
 /**
  * @author Melih Aksoy
- * Created by Melih on 19/01/16.
+ *         Created by Melih on 19/01/16.
  */
 public class HoldToLoadLayout extends FrameLayout {
 
-	public static final int DEFAULT_DURATION = 1500;
+	public static final int DEFAULT_DURATION = 1000;
 	public static final int DEFAULT_START_ANGLE = 270;
 	public static final int DEFAULT_ALPHA = 255;
 	public static final int DEFAULT_COLOR = Color.GREEN;
@@ -60,9 +60,11 @@ public class HoldToLoadLayout extends FrameLayout {
 	private boolean isPreparingColorAnimator;
 	private boolean isInitialized;
 	private boolean animateColors;
+	private boolean isHoldAtLastPosition;
 
 	private boolean stopWhenFilled = true;
 	private boolean isReverseAnimationEnabled = true;
+
 
 	@SuppressLint("unused")
 	public HoldToLoadLayout(Context context) {
@@ -252,17 +254,20 @@ public class HoldToLoadLayout extends FrameLayout {
 					startForwardColorAnimator();
 				}
 			} else {
-				if (isReverseAnimationEnabled) {
-					startReverseProgressAnimator();
-					if (animateColors) {
-						startReverseColorAnimator();
+				stopForwardProgressAnimator();
+				if (!isHoldAtLastPosition) {
+					if (isReverseAnimationEnabled) {
+						startReverseProgressAnimator();
+						if (animateColors) {
+							startReverseColorAnimator();
+						}
+					} else {
+						if (animateColors) {
+							stopForwardColorAnimator();
+						}
+
+						mAngle = 0;
 					}
-				} else {
-					stopForwardProgressAnimator();
-					if (animateColors) {
-						stopForwardColorAnimator();
-					}
-					mAngle = 0;
 				}
 			}
 		}
@@ -438,6 +443,26 @@ public class HoldToLoadLayout extends FrameLayout {
 	@SuppressLint("unused")
 	public boolean isReverseAnimationEnabled() {
 		return isReverseAnimationEnabled;
+	}
+
+	/**
+	 * Set {@code true} if you want progress to hold after you lift your finger up. Enabling this will suppress the use of {@link #stopWhenFilled}.
+	 *
+	 * @param isHoldAtLastPosition {@code true} if reverse animation should be enabled
+	 */
+	@SuppressLint("unused")
+	public void setHoldAtLastPosition(boolean isHoldAtLastPosition) {
+		this.isHoldAtLastPosition = isHoldAtLastPosition;
+	}
+
+	/**
+	 * Return progress will hold after you lift your finger up.
+	 *
+	 * @return {@code true} if reverse animation is enabled, returns {@code true} by default if not set
+	 */
+	@SuppressLint("unused")
+	public boolean isHoldAtLastPosition() {
+		return isHoldAtLastPosition;
 	}
 
 	/**
