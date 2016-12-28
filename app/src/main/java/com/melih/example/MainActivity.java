@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 			holdToLoadLayout.setPlayReverseAnimation(true);
 			holdToLoadLayout.setStopWhenFilled(false);
 			holdToLoadLayout.setColorAnimator(Color.YELLOW, Color.RED);
-			holdToLoadLayout.setStartAngle(30);
+			holdToLoadLayout.setStartAngle(0);
 
 			/**
 			 * Enabling this will suppress the use of stopWhenFilled and cause progress to stop at all times
@@ -32,17 +32,20 @@ public class MainActivity extends AppCompatActivity {
 			holdToLoadLayout.setFillListener(new HoldToLoadLayout.FillListener() {
 				@Override
 				public void onFull() {
-					//					holdToLoadLayout.setStrokeColor(android.R.color.holo_green_dark);
-					holdToLoadLayout.setDuration(1000);
+
 				}
 
 				@Override
 				public void onEmpty() {
-
 				}
 
 				@Override
 				public void onAngleChanged(float angle) {
+
+				}
+
+				@Override
+				public void onOffsetChanged(float offset) {
 
 				}
 			});
