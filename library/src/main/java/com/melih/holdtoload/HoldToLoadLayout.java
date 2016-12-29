@@ -23,7 +23,6 @@ import android.widget.FrameLayout;
 public class HoldToLoadLayout extends FrameLayout {
 
 	public static final int DEFAULT_DURATION = 1000;
-	public static final int DEFAULT_START_ANGLE = 270;
 	public static final int DEFAULT_ALPHA = 255;
 	public static final int DEFAULT_COLOR = Color.GREEN;
 
@@ -213,7 +212,7 @@ public class HoldToLoadLayout extends FrameLayout {
 			setStrokeColor(DEFAULT_COLOR);
 		}
 
-		setStartAngle(typedArray.getInt(R.styleable.HoldToLoadLayout_hold_startAngle, DEFAULT_START_ANGLE));
+		setStartAngle(typedArray.getFloat(R.styleable.HoldToLoadLayout_hold_startAngle, Angle.TOP.getValue()));
 		setStrokeWidth(typedArray.getDimensionPixelSize(R.styleable.HoldToLoadLayout_hold_strokeWidth, 0));
 		setStrokeAlpha(typedArray.getInt(R.styleable.HoldToLoadLayout_hold_strokeAlpha, DEFAULT_ALPHA));
 		setDuration(typedArray.getInt(R.styleable.HoldToLoadLayout_hold_duration, DEFAULT_DURATION));
@@ -448,7 +447,8 @@ public class HoldToLoadLayout extends FrameLayout {
 	}
 
 	/**
-	 * Set {@code true} if you want progress to hold after you lift your finger up. Enabling this will suppress the use of {@link #stopWhenFilled}.
+	 * Set {@code true} if you want progress to hold after you lift your finger up.
+	 * Enabling this will suppress the use of {@link #stopWhenFilled}.
 	 *
 	 * @param isHoldAtLastPosition {@code true} if reverse animation should be enabled
 	 */
@@ -536,6 +536,7 @@ public class HoldToLoadLayout extends FrameLayout {
 
 	/**
 	 * Sets stroke width in pixels if given value is greater than 0
+	 * This method does not dynamically updates stroke width
 	 *
 	 * @param strokeWidth stroke width in pixels
 	 */
@@ -558,6 +559,7 @@ public class HoldToLoadLayout extends FrameLayout {
 
 	/**
 	 * Set stroke color. If color animation is disabled, stroke will be painted with this color
+	 * This method does not dynamically updates stroke color
 	 *
 	 * @param color int value of the stroke color
 	 */
@@ -568,6 +570,7 @@ public class HoldToLoadLayout extends FrameLayout {
 
 	/**
 	 * Set stroke color. If color animation is disabled, stroke will be painted with this color
+	 * This method does not dynamically updates stroke color
 	 *
 	 * @param color int value of the stroke color
 	 */
@@ -639,14 +642,18 @@ public class HoldToLoadLayout extends FrameLayout {
 
 	/**
 	 * Set starting angle
-	 * <p/>
-	 * 0   -> Right
-	 * 90  -> Bottom
-	 * 180 -> Left
-	 * 270 -> Top
-	 * 360 -> Right
 	 *
-	 * @param startAngle float value of starting angle, must be between 0 and 360 inclusive
+	 * @param startAngle {@link Angle} value of starting angle
+	 */
+	@SuppressLint("unused")
+	public void setStartAngle(Angle startAngle) {
+		mStartAngle = startAngle.getValue();
+	}
+
+	/**
+	 * Set starting angle
+	 *
+	 * @param startAngle float value of starting angle
 	 */
 	@SuppressLint("unused")
 	public void setStartAngle(float startAngle) {
@@ -699,5 +706,18 @@ public class HoldToLoadLayout extends FrameLayout {
 
 		@SuppressLint("unused")
 		void onOffsetChanged(float offset);
+	}
+
+	public enum Angle {
+		TOP(270), RIGHT(0), BOTTOM(90), LEFT(180);
+		private float value;
+
+		Angle(int value) {
+			this.value = value;
+		}
+
+		public float getValue() {
+			return value;
+		}
 	}
 }

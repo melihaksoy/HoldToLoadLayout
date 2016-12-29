@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="HoldToLoadLayout">
-        <attr name="hold_strokeColor" format="string"/>
-        <attr name="hold_strokeWidth" format="dimension"/>
-        <attr name="hold_strokeAlpha" format="integer"/>
-        <attr name="hold_startAngle" format="integer"/>
-        <attr name="hold_duration" format="integer"/>
-        <attr name="hold_stopWhenFilled" format="boolean"/>
-    </declare-styleable>
+	<declare-styleable name="HoldToLoadLayout">
+		<attr name="hold_strokeColor" format="string"/>
+		<attr name="hold_strokeWidth" format="dimension"/>
+		<attr name="hold_strokeAlpha" format="integer"/>
+		<attr name="hold_duration" format="integer"/>
+		<attr name="hold_stopWhenFilled" format="boolean"/>
+		<attr name="hold_startAngle" format="float"/>
+	</declare-styleable>
 </resources>
