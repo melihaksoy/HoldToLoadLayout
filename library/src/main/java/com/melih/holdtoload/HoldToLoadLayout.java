@@ -723,7 +723,7 @@ public class HoldToLoadLayout extends FrameLayout {
 
 	public enum Angle {
 		TOP(270), RIGHT(0), BOTTOM(90), LEFT(180);
-		private float value;
+		private final float value;
 
 		Angle(int value) {
 			this.value = value;
