@@ -44,6 +44,7 @@ Simply, add a child to HoldToLoadLayout, than set properties about the animation
          holdToLoadLayout.setPlayReverseAnimation(true); // Reverse like it fills, with animation
          holdToLoadLayout.setStopWhenFilled(false); // Stop when holded fully
          holdToLoadLayout.setColorAnimator(Color.YELLOW, Color.RED); // Animate color while drawing
+         holdToLoadLayout.setStartAngle(Angle.TOP); // Use any of the pre-defined starting angle
          holdToLoadLayout.setStartAngle(30); // Starting angle of loading
 ```
 
@@ -52,31 +53,46 @@ Simply, add a child to HoldToLoadLayout, than set properties about the animation
 ```java
 setStrokeWidth(int strokeWidth)
 ```
-<ul><li> Sets stroke width in pixels if <b>strokewidth</b> is greater than 0.</br>
+<ul><li> Sets stroke width in pixels if <b>strokeWidth</b> is greater than 0.
+<br>
 You can set dp values from XML. Default is 0.
+<br>
+Does NOT updates stroke width dynamically.
 </li></ul>
 
 ```java
 setPlayReverseAnimation(boolean isReverseAnimationEnabled)
 ``` 
 <ul><li>
-If set true, loading will reverse from the point user stopped touching to 0. If set false, loading will disappear instantly.</br>
+If set true, loading will reverse from the point user stopped touching to 0. If set false, loading will disappear instantly.
+<br>
 Default value is true.
 </li></ul>
 
 ```java
 setStopWhenFilled(boolean stopWhenFilled)
-``` 
+```
 <ul><li>
-If set true, loading will stop when it's completed. If set false, loading will be reversed /disappear even if it is filled.</br>
+If set true, loading will stop when it's completed. If set false, loading will be reversed /disappear even if it is filled.
+<br>
 Default value is true;
+</li></ul>
+
+```java
+setHoldAtLastPosition(boolean isHoldAtLastPosition)
+```
+<ul><li>
+If set true, progress will not be reverted or reset when user lifts up his/her finger. This will suppress stopWhenFilled and setPlayReverseAnimation.
+<br>
+Default value is false.
 </li></ul>
 
 ```java
 setColorAnimator(int startingColor, int endingColor)
 ```
 <ul><li>
-When set, changes color of loading animation up to progress, starting with <b>startingColor</b> and ending with <b>endingColor</b>.</br>
+When set, changes color of loading animation up to progress, starting with <b>startingColor</b> and ending with <b>endingColor</b>.
+<br>
 There is no color animation by default.
 </li></ul>
 
@@ -86,13 +102,16 @@ setStrokeColor(String color)
 ```
 <ul><li>
 Set loading's color. Default color is <b>Color.GREEN</b> ( <b> HoldToLoadLayout.DEFAULT_COLOR </b> ).
+<br>
+Does NOT updates color dynamically.
 </li></ul>
 
 ```java
 setDuration(int durationInMillis)
 ```
 <ul><li>
-Set duration of fill time in milliseconds. This will throw <b>IllegalArgumentException</b> if <b>durationInMillis is not greater than 0</b>.</br>
+Set duration of fill time in milliseconds. This will throw <b>IllegalArgumentException</b> if <b>durationInMillis is not greater than 0</b>.
+<br>
 Default value is 1500 ( <b> HoldToLoadLayout.DEFAULT_DURATION </b> ).
 </li></ul>
 
@@ -100,15 +119,33 @@ Default value is 1500 ( <b> HoldToLoadLayout.DEFAULT_DURATION </b> ).
 setStrokeAlpha(int alpha)
 ```
 <ul><li>
-Set paint's alpha value. This will throw <b>IllegalArgumentException</b> if <b>alpha is less than 0 or greater than 255</b>.</br>
+Set paint's alpha value. This will throw <b>IllegalArgumentException</b> if <b>alpha is less than 0 or greater than 255</b>.
+<br>
 Default value is 255 ( <b> HoldToLoadLayout.DEFAULT_ALPHA </b> ).
+</li></ul>
+
+```java
+setStartAngle(Angle startAngle)
+```
+<ul><li>
+Set loading's starting point from pre-defined angles. Default value is Angle.TOP
 </li></ul>
 
 ```java
 setStartAngle(float startAngle)
 ```
 <ul><li>
-Set loading's starting point as angle. Default value is 270 ( top ) ( <b> HoldToLoadLayout.DEFAULT_START_ANGLE </b> ).</br>
+Set loading's starting point as angle. Default value is 270 ( top ) ( <b> HoldToLoadLayout.DEFAULT_START_ANGLE </b> ).
+<br>
+</li></ul>
+
+```java
+setFillListener(FillListener fillListener)
+```
+<ul><li>
+Set a fill listener ( HoldToLoadLayout.FillListener() ), which has <b>onFull()</b>, <b>onEmpty()</b>, <b>onAngleChanged(float angle)</b> and <b>onOffsetChanged(float offset)</b>methods.
+<br>
+Setting null will remove the listener.
 </li></ul>
 
 ```java
@@ -118,15 +155,22 @@ setFillListener(FillListener fillListener)
 Set a fill listener ( HoldToLoadLayout.FillListener() ), which has <b>onFull()</b>, <b>onEmpty()</b> and <b>onAngleChanged(float angle)</b> methods.
 </li></ul>
 
+```java
+removeFillListener()
+```
+<ul><li>
+Removes fill listener.
+</li></ul>
+
 ## XML Attributes
 
 ```xml
-        <attr name="strokeColor" format="string"/>
-        <attr name="strokeWidth" format="dimension"/>
-        <attr name="strokeAlpha" format="integer"/>
-        <attr name="startAngle" format="integer"/>
-        <attr name="duration" format="integer"/>
-        <attr name="stopWhenFilled" format="boolean"/>
+        <attr name="hold_strokeColor" format="string"/>
+        		<attr name="hold_strokeWidth" format="dimension"/>
+        		<attr name="hold_strokeAlpha" format="integer"/>
+        		<attr name="hold_duration" format="integer"/>
+        		<attr name="hold_stopWhenFilled" format="boolean"/>
+        		<attr name="hold_startAngle" format="float"/>
 ```
 
 ## Download
@@ -145,7 +189,7 @@ Add library dependency to your `build.gradle` file:
 
 ```groovy
 dependencies {    
-     compile 'com.github.melihaksoy:HoldToLoadLayout:1.0.3'
+     compile 'com.github.melihaksoy:HoldToLoadLayout:1.0.4'
 }
 ```
 
