@@ -691,6 +691,14 @@ public class HoldToLoadLayout extends FrameLayout {
 	}
 
 	/**
+	 * Removes fill listener
+	 */
+	@SuppressLint("unused")
+	public void removeFillListener() {
+		mFillListener = null;
+	}
+
+	/**
 	 * Fill listener interface
 	 */
 	public interface FillListener {
