@@ -11,6 +11,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,9 @@ import android.widget.FrameLayout;
  */
 public class HoldToLoadLayout extends FrameLayout {
 
-	public static final int DEFAULT_DURATION = 1000;
+	private static final String TAG = "HoldToLoadLayout";
+
+	public static final int DEFAULT_DURATION = 5000;
 	public static final int DEFAULT_ALPHA = 255;
 	public static final int DEFAULT_COLOR = Color.GREEN;
 
@@ -254,17 +257,17 @@ public class HoldToLoadLayout extends FrameLayout {
 				}
 			} else {
 				stopForwardProgressAnimator();
-				if (!isHoldAtLastPosition) {
-					if (isReverseAnimationEnabled) {
-						startReverseProgressAnimator();
-						if (animateColors) {
-							startReverseColorAnimator();
-						}
-					} else {
-						if (animateColors) {
-							stopForwardColorAnimator();
-						}
+				if (isReverseAnimationEnabled && !isHoldAtLastPosition) {
+					startReverseProgressAnimator();
+					if (animateColors) {
+						startReverseColorAnimator();
+					}
+				} else {
+					if (animateColors) {
+						stopForwardColorAnimator();
+					}
 
+					if (!isHoldAtLastPosition) {
 						mAngle = 0;
 					}
 				}
@@ -380,6 +383,8 @@ public class HoldToLoadLayout extends FrameLayout {
 					@Override
 					public void onAnimationUpdate(ValueAnimator animation) {
 						mAnimatedValue = (float) animation.getAnimatedValue();
+						Log.d(TAG, "onAnimationUpdate: " + mAnimatedValue);
+
 						hsvArr[0] = fromColorArr[0] + (toColorArr[0] - fromColorArr[0]) * mAnimatedValue;
 						hsvArr[1] = fromColorArr[1] + (toColorArr[1] - fromColorArr[1]) * mAnimatedValue;
 						hsvArr[2] = fromColorArr[2] + (toColorArr[2] - fromColorArr[2]) * mAnimatedValue;

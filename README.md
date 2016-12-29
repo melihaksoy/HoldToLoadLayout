@@ -112,7 +112,7 @@ setDuration(int durationInMillis)
 <ul><li>
 Set duration of fill time in milliseconds. This will throw <b>IllegalArgumentException</b> if <b>durationInMillis is not greater than 0</b>.
 <br>
-Default value is 1500 ( <b> HoldToLoadLayout.DEFAULT_DURATION </b> ).
+Default value is 1000 ( <b> HoldToLoadLayout.DEFAULT_DURATION </b> ).
 </li></ul>
 
 ```java
@@ -189,7 +189,7 @@ Add library dependency to your `build.gradle` file:
 
 ```groovy
 dependencies {    
-     compile 'com.github.melihaksoy:HoldToLoadLayout:1.0.4'
+     compile 'com.github.melihaksoy:HoldToLoadLayout:1.0.5'
 }
 ```
 
