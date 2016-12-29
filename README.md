@@ -17,6 +17,7 @@ Sample Gifs
 ![Anim](https://github.com/melihaksoy/HoldToLoadLayout/blob/master/gifs/hlt_2.gif)
 ![Anim](https://github.com/melihaksoy/HoldToLoadLayout/blob/master/gifs/htl_3.gif)
 ![Anim](https://github.com/melihaksoy/HoldToLoadLayout/blob/master/gifs/htl_4.gif)
+![Anim](https://github.com/melihaksoy/HoldToLoadLayout/blob/master/gifs/htl_5.gif)
 
 # Usage
 
