@@ -25,7 +25,7 @@ public class HoldToLoadLayout extends FrameLayout {
 
 	private static final String TAG = "HoldToLoadLayout";
 
-	public static final int DEFAULT_DURATION = 5000;
+	public static final int DEFAULT_DURATION = 1500;
 	public static final int DEFAULT_ALPHA = 255;
 	public static final int DEFAULT_COLOR = Color.GREEN;
 
