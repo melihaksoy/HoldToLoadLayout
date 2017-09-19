@@ -33,22 +33,22 @@ public class MainActivity extends AppCompatActivity {
 		mHoldToLoadLayout.setFillListener(new HoldToLoadLayout.FillListener() {
 			@Override
 			public void onFull() {
-
+				//Works when filled
 			}
 
 			@Override
 			public void onEmpty() {
-
+				//Works when empty or reverted to 0
 			}
 
 			@Override
 			public void onAngleChanged(float angle) {
-
+				//Do magic with angle
 			}
 
 			@Override
 			public void onOffsetChanged(float offset) {
-
+				//Do magic with offset
 			}
 		});
 	}
